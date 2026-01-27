@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mujeebur Rehman - AI & Data Professional</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #fff; background: #000; overflow-x: hidden; }
+        
+        .nav { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 30px rgba(102,126,234,0.4); z-index: 1000; padding: 1rem 0; border-bottom: 2px solid rgba(102,126,234,0.3); }
+        .nav-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: #fff; font-weight: 500; transition: all 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: linear-gradient(135deg, #667eea 0%, #f093fb 100%); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: #667eea; }
+        
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%); padding: 6rem 2rem 2rem; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 20% 50%, rgba(102,126,234,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(240,147,251,0.3) 0%, transparent 50%), radial-gradient(circle at 50% 20%, rgba(118,75,162,0.2) 0%, transparent 60%); animation: pulse 10s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        
+        .particles { position: absolute; width: 100%; height: 100%; overflow: hidden; }
+        .particle { position: absolute; width: 3px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 50%; animation: float 20s infinite; }
+        @keyframes float { 0% { transform: translateY(100vh) translateX(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100vh) translateX(100px); opacity: 0; } }
+        
+        .hero-content { position: relative; z-index: 1; max-width: 900px; text-align: center; }
+        .hero h1 { font-size: 4.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #fff 0%, #667eea 50%, #f093fb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: fadeInUp 1s ease; text-shadow: 0 0 40px rgba(102,126,234,0.5); }
+        
+        .job-titles { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; animation: fadeInUp 1s ease 0.2s both; }
+        .job-title { font-size: 1.6rem; color: #f093fb; font-weight: 600; }
+        .job-separator { color: #667eea; font-size: 1.2rem; }
+        
+        .hero p { font-size: 1.2rem; margin-bottom: 2.5rem; color: #ccc; max-width: 700px; margin-left: auto; margin-right: auto; animation: fadeInUp 1s ease 0.4s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .badges { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; animation: fadeInUp 1s ease 0.6s both; justify-content: center; }
+        .badge { background: linear-gradient(135deg, rgba(102,126,234,0.3) 0%, rgba(240,147,251,0.3) 100%); padding: 0.8rem 1.4rem; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(240,147,251,0.4); font-size: 0.95rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102,126,234,0.2); }
+        .badge:hover { background: linear-gradient(135deg, rgba(102,126,234,0.5) 0%, rgba(240,147,251,0.5) 100%); transform: translateY(-5px); box-shadow: 0 8px 25px rgba(240,147,251,0.4); }
+        
+        .cta-buttons { display: flex; gap: 1.5rem; flex-wrap: wrap; animation: fadeInUp 1s ease 0.8s both; justify-content: center; }
+        .btn { padding: 1.2rem 3rem; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s; border: none; cursor: pointer; font-size: 1.05rem; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); color: white; box-shadow: 0 10px 30px rgba(102,126,234,0.5); }
+        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(240,147,251,0.6); }
+        .btn-secondary { background: transparent; color: white; border: 2px solid #f093fb; }
+        .btn-secondary:hover { background: linear-gradient(135deg, rgba(102,126,234,0.2) 0%, rgba(240,147,251,0.2) 100%); transform: translateY(-5px); }
+        
+        .section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; }
+        .section:nth-child(even) { background: linear-gradient(135deg, rgba(15,12,41,0.5) 0%, rgba(48,43,99,0.5) 100%); }
+        .section:nth-child(odd) { background: linear-gradient(135deg, rgba(36,36,62,0.3) 0%, rgba(15,12,41,0.3) 100%); }
+        
+        .section-title { text-align: center; font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(135deg, #fff 0%, #667eea 50%, #f093fb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-title::after { content: ''; display: block; width: 100px; height: 4px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); margin: 1rem auto; border-radius: 2px; box-shadow: 0 0 20px rgba(240,147,251,0.5); }
+        
+        .slider-container { position: relative; overflow: hidden; margin-top: 3rem; }
+        .slider { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
+        .slider-nav { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
+        .slider-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(102,126,234,0.3); cursor: pointer; transition: all 0.3s; border: 2px solid rgba(240,147,251,0.3); }
+        .slider-dot.active { background: linear-gradient(135deg, #667eea 0%, #f093fb 100%); transform: scale(1.3); box-shadow: 0 0 15px rgba(240,147,251,0.8); }
+        
+        .expertise-card { background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(240,147,251,0.05) 100%); padding: 2rem; border-radius: 20px; border: 1px solid rgba(240,147,251,0.3); transition: all 0.4s; backdrop-filter: blur(10px); position: relative; overflow: hidden; }
+        .expertise-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(102,126,234,0.2) 0%, transparent 100%); opacity: 0; transition: opacity 0.4s; }
+        .expertise-card:hover::before { opacity: 1; }
+        .expertise-card:hover { transform: translateY(-15px) scale(1.02); border-color: rgba(240,147,251,0.6); box-shadow: 0 20px 60px rgba(240,147,251,0.4); }
+        .expertise-card h3 { color: #f093fb; margin-bottom: 1rem; font-size: 1.5rem; position: relative; z-index: 1; }
+        .expertise-card .summary { color: #ccc; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; position: relative; z-index: 1; }
+        
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .tag { background: linear-gradient(135deg, rgba(102,126,234,0.2) 0%, rgba(240,147,251,0.2) 100%); padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.8rem; color: #fff; border: 1px solid rgba(240,147,251,0.4); transition: all 0.3s; }
+        .tag:hover { background: linear-gradient(135deg, rgba(102,126,234,0.4) 0%, rgba(240,147,251,0.4) 100%); transform: scale(1.1); box-shadow: 0 4px 15px rgba(240,147,251,0.3); }
+        
+        .achievements { position: relative; z-index: 1; }
+        .achievements h4 { color: #667eea; font-size: 0.85rem; margin-bottom: 0.4rem; }
+        .achievements ul { margin-left: 1.2rem; }
+        .achievements li { color: #ddd; font-size: 0.85rem; margin-bottom: 0.3rem; }
+        
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%); box-shadow: 0 0 20px rgba(240,147,251,0.5); }
+        
+        .timeline-item { position: relative; margin-bottom: 2.5rem; background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(240,147,251,0.05) 100%); padding: 1.5rem 1.5rem 1.5rem 3rem; border-radius: 15px; border: 1px solid rgba(240,147,251,0.3); transition: all 0.3s; }
+        .timeline-item:hover { background: linear-gradient(135deg, rgba(102,126,234,0.15) 0%, rgba(240,147,251,0.1) 100%); transform: translateX(15px); box-shadow: 0 10px 40px rgba(240,147,251,0.3); }
+        .timeline-item::before { content: ''; position: absolute; left: -2.6rem; top: 1.5rem; width: 14px; height: 14px; background: linear-gradient(135deg, #667eea 0%, #f093fb 100%); border-radius: 50%; border: 3px solid #000; box-shadow: 0 0 15px rgba(240,147,251,0.8); }
+        .timeline-item h3 { color: #f093fb; font-size: 1.3rem; margin-bottom: 0.3rem; }
+        .timeline-item .company { color: #ccc; margin-bottom: 0.3rem; font-weight: 600; font-size: 0.95rem; }
+        .timeline-item .date { color: #888; font-size: 0.85rem; margin-bottom: 0.8rem; }
+        .timeline-item ul { margin-left: 1.5rem; }
+        .timeline-item li { margin-bottom: 0.5rem; color: #ddd; font-size: 0.9rem; }
+        
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .project-card { background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(240,147,251,0.05) 100%); border-radius: 20px; overflow: hidden; border: 1px solid rgba(240,147,251,0.3); transition: all 0.4s; }
+        .project-card:hover { transform: translateY(-15px); box-shadow: 0 25px 70px rgba(240,147,251,0.4); border-color: rgba(240,147,251,0.6); }
+        
+        .project-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); color: white; padding: 2rem; position: relative; overflow: hidden; }
+        .project-header::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%); animation: rotate 20s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .project-header h3 { font-size: 1.4rem; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+        .project-tech { font-size: 0.85rem; opacity: 0.95; position: relative; z-index: 1; }
+        
+        .project-body { padding: 1.5rem; background: rgba(0,0,0,0.3); }
+        .project-body ul { margin-left: 1.5rem; }
+        .project-body li { margin-bottom: 0.6rem; color: #ddd; font-size: 0.9rem; }
+        
+        .contact { background: linear-gradient(135deg, rgba(15,12,41,0.8) 0%, rgba(48,43,99,0.8) 50%, rgba(36,36,62,0.8) 100%); padding: 5rem 2rem; border-top: 2px solid rgba(240,147,251,0.3); text-align: center; position: relative; overflow: hidden; }
+        .contact::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(240,147,251,0.15) 0%, transparent 70%); }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 900px; margin: 3rem auto 0; position: relative; z-index: 1; }
+        .contact-item { background: linear-gradient(135deg, rgba(102,126,234,0.2) 0%, rgba(240,147,251,0.1) 100%); padding: 2rem; border-radius: 20px; border: 1px solid rgba(240,147,251,0.4); transition: all 0.3s; backdrop-filter: blur(10px); }
+        .contact-item:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(240,147,251,0.4); background: linear-gradient(135deg, rgba(102,126,234,0.3) 0%, rgba(240,147,251,0.2) 100%); }
+        .contact-item h3 { margin-bottom: 1rem; font-size: 1.2rem; color: #f093fb; }
+        .contact-item a { color: #fff; text-decoration: none; transition: color 0.3s; }
+        .contact-item a:hover { color: #f093fb; }
+        
+        .footer { background: rgba(0,0,0,0.8); text-align: center; padding: 2rem; border-top: 2px solid rgba(240,147,251,0.3); color: #888; }
+        
+        @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2.5rem; } .job-title { font-size: 1.2rem; } .slide { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">MR</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Mujeebur Rehman</h1>
+            <div class="job-titles">
+                <div class="job-title">Data Analyst | Data Scientist</div>
+                <div class="job-separator">•</div>
+                <div class="job-title">AI & Machine Learning Specialist</div>
+                <div class="job-separator">•</div>
+                <div class="job-title">Full Stack MERN Developer</div>
+            </div>
+            <p>Transforming data into intelligent solutions with 2+ years experience in AI, ML, NLP, and Computer Vision achieving 40% improvement in business outcomes.</p>
+            <div class="badges">
+                <div class="badge">💼 Available Immediately</div>
+                <div class="badge">📍 Dubai, UAE</div>
+                <div class="badge">📅 Visa Valid: Feb 25, 2026</div>
+            </div>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#projects" class="btn btn-secondary">View Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="section">
+        <h2 class="section-title">Areas of Expertise</h2>
+        <div class="slider-container">
+            <div class="slider" id="expertiseSlider">
+                <div class="slide">
+                    <div class="expertise-card">
+                        <h3>🤖 Artificial Intelligence</h3>
+                        <p class="summary">Developing intelligent systems for decision-making, problem-solving, perception, and language understanding. Integrating ML, NLP, and Computer Vision for automation and predictive insights.</p>
+                        <div class="skill-tags">
+                            <span class="tag">AI Modeling</span>
+                            <span class="tag">Intelligent Systems</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">NLP</span>
+                            <span class="tag">Computer Vision</span>
+                        </div>
+                        <div class="achievements">
+                            <h4>Achievements</h4>
+                            <ul>
+                                <li>AI chatbot reducing response time by 40%</li>
+                                <li>Computer vision defect detection at 95% accuracy</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="expertise-card">
+                        <h3>🧠 Machine Learning</h3>
+                        <p class="summary">Building predictive models using supervised, unsupervised, and reinforcement learning. Applied in recommendation systems, fraud detection, and demand forecasting.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Supervised Learning</span>
+                            <span class="tag">Unsupervised Learning</span>
+                            <span class="tag">Scikit-learn</span>
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">PyTorch</span>
+                            <span class="tag">XGBoost</span>
+                        </div>
+                        <div class="achievements">
+                            <h4>Achievements</h4>
+                            <ul>
+                                <li>Sales forecasting with Random Forest & XGBoost</li>
+                                <li>Customer segmentation using K-Means</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="expertise-card">
+                        <h3>✨ Generative AI</h3>
+                        <p class="summary">Leveraging Large Language Models for content generation, chatbots, and AI assistants. Expertise in prompt engineering, fine-tuning, and RAG systems.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Large Language Models</span>
+                            <span class="tag">Claude AI</span>
+                            <span class="tag">GPT Models</span>
+                            <span class="tag">Prompt Engineering</span>
+                            <span class="tag">HuggingFace</span>
+                        </div>
+                        <div class="achievements">
+                            <h4>Achievements</h4>
+                            <ul>
+                                <li>AI learning platform serving 500+ students</li>
+                                <li>Optimized LLM responses by 50%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="expertise-card">
+                        <h3>🔬 Data Science</h3>
+                        <p class="summary">Extracting actionable insights through statistical modeling, ML, and visualization. Data collection, cleaning, analysis, and predictive modeling for business solutions.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Statistical Modeling</span>
+                            <span class="tag">Data Visualization</span>
+                            <span class="tag">EDA</span>
+                            <span class="tag">Feature Engineering</span>
+                        </div>
+                        <div class="achievements">
+                            <h4>Achievements</h4>
+                            <ul>
+                                <li>E-commerce EDA identifying top products</li>
+                                <li>Churn prediction reducing churn by 15%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="expertise-card">
+                        <h3>📊 Data Analytics</h3>
+                        <p class="summary">Uncovering patterns and trends for decision-making. Descriptive, diagnostic, predictive, and prescriptive analytics using Excel, SQL, Power BI, and Python.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Advanced Excel</span>
+                            <span class="tag">SQL</span>
+                            <span class="tag">Power BI</span>
+                            <span class="tag">Data Cleaning</span>
+                            <span class="tag">A/B Testing</span>
+                        </div>
+                        <div class="achievements">
+                            <h4>Achievements</h4>
+                            <ul>
+                                <li>Power BI dashboards for executive decisions</li>
+                                <li>Anomaly detection reducing errors by 20%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="expertise-card">
+                        <h3>🎯 Advanced ML</h3>
+                        <p class="summary">Expertise in NLP, Computer Vision, and Robotics. Developing intelligent systems for visual and textual data understanding, automation, and decision support.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Natural Language Processing</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Robotics</span>
+                            <span class="tag">Deep Learning</span>
+                            <span class="tag">Reinforcement Learning</span>
+                        </div>
+                        <div class="achievements">
+                            <h4>Achievements</h4>
+                            <ul>
+                                <li>NLP sentiment analysis models</li>
+                                <li>Computer vision object detection systems</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="expertise-card">
+                        <h3>💻 Full Stack MERN Development</h3>
+                        <p class="summary">Building scalable web applications using MongoDB, Express.js, React, and Node.js. Creating responsive UIs, RESTful APIs, and implementing authentication, state management, and database integration.</p>
+                        <div class="skill-tags">
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">Express.js</span>
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">REST APIs</span>
+                            <span class="tag">Redux</span>
+                            <span class="tag">JWT Authentication</span>
+                            <span class="tag">Mongoose</span>
+                        </div>
+                        <div class="achievements">
+                            <h4>Achievements</h4>
+                            <ul>
+                                <li>Built full-stack e-commerce platform with payment integration</li>
+                                <li>Developed responsive web apps serving 1000+ users</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="expertise-card">
+                        <h3>🛠️ Web Technologies</h3>
+                        <p class="summary">Modern web development with HTML5, CSS3, JavaScript ES6+, and frameworks. Building responsive, accessible, and performant web applications with Git version control and deployment.</p>
+                        <div class="skill-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript ES6+</span>
+                            <span class="tag">Bootstrap</span>
+                            <span class="tag">Tailwind CSS</span>
+                            <span class="tag">Git</span>
+                            <span class="tag">GitHub</span>
+                        </div>
+                        <div class="achievements">
+                            <h4>Achievements</h4>
+                            <ul>
+                                <li>Created responsive UI components for 10+ projects</li>
+                                <li>Implemented modern design patterns and best practices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <div class="slider-dot active" onclick="goToSlide(0)"></div>
+                <div class="slider-dot" onclick="goToSlide(1)"></div>
+                <div class="slider-dot" onclick="goToSlide(2)"></div>
+                <div class="slider-dot" onclick="goToSlide(3)"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>AI & ML Specialist</h3>
+                <div class="company">Masai School, Bengaluru</div>
+                <div class="date">Sep 2025 - Dec 2025</div>
+                <ul>
+                    <li>Architected AI learning platform using LLMs serving 500+ students with 40% better outcomes</li>
+                    <li>Optimized ML models achieving 50% faster response time</li>
+                    <li>Implemented reinforcement learning for adaptive content delivery</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Data Analyst</h3>
+                <div class="company">Delta, Pune</div>
+                <div class="date">Aug 2024 - Sep 2025</div>
+                <ul>
+                    <li>Analyzed 100K+ datasets impacting 5+ departments</li>
+                    <li>Built 10+ Power BI dashboards improving efficiency by 30%</li>
+                    <li>ML models improving forecast accuracy by 28%</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Data Analyst</h3>
+                <div class="company">Pantech Solutions, Tamil Nadu</div>
+                <div class="date">Nov 2023 - Jun 2024</div>
+                <ul>
+                    <li>Data solutions improving efficiency by 20%</li>
+                    <li>10+ dashboards streamlining reporting</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Full Stack MERN Developer</h3>
+                <div class="company">AttainU University</div>
+                <div class="date">18 Months Experience</div>
+                <ul>
+                    <li>Developed full-stack web applications using MongoDB, Express.js, React, and Node.js</li>
+                    <li>Built RESTful APIs and integrated third-party services</li>
+                    <li>Implemented authentication, authorization, and state management using Redux</li>
+                    <li>Created responsive UI components and optimized application performance</li>
+                    <li>Collaborated with teams using Git/GitHub for version control</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <a href="https://github.com/mujeebur-rehman-au52/projects" target="_blank" class="btn btn-secondary" style="display: inline-block;">
+                🔗 View All Projects on GitHub
+            </a>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>AI Personalized Learning Platform</h3>
+                    <div class="project-tech">Python • LLMs • Claude AI • Reinforcement Learning • HuggingFace</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>End-to-end AI platform with LLM integration</li>
+                        <li>RL algorithms for personalized learning paths</li>
+                        <li>40% better outcomes, 50% faster responses</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Full Stack E-Commerce Platform</h3>
+                    <div class="project-tech">MongoDB • Express.js • React • Node.js • Redux • Stripe API • JWT</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>Complete e-commerce solution with shopping cart and payment integration</li>
+                        <li>User authentication and authorization with JWT tokens</li>
+                        <li>Admin dashboard for product and order management</li>
+                        <li>Responsive design with React and modern UI/UX principles</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Predictive Analytics System</h3>
+                    <div class="project-tech">Python • Scikit-learn • TensorFlow • PyTorch • XGBoost</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>ML models with 28% accuracy improvement</li>
+                        <li>Supervised & unsupervised learning techniques</li>
+                        <li>Automated retraining pipelines</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Interactive Project Dashboard</h3>
+                    <div class="project-tech">Excel • VBA • Advanced Formulas • Data Visualization • Automation</div>
+                </div>
+                <div class="project-body">
+                    <ul>
+                        <li>Dynamic Excel dashboard with VBA macros for automation</li>
+                        <li>Interactive data visualization and reporting system</li>
+                        <li>Real-time project tracking and KPI monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <p style="max-width: 700px; margin: 0 auto 2rem; color: #ccc; position: relative; z-index: 1;">Actively seeking Data Analyst, Data Scientist, and AI/ML opportunities in Dubai. Let's discuss how I can contribute!</p>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <h3>📧 Email</h3>
+                <a href="mailto:mujeeb9902@gmail.com">mujeeb9902@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <h3>📱 Phone</h3>
+                <a href="tel:+971565327237">+971 565327237</a>
+            </div>
+            <div class="contact-item">
+                <h3>💼 LinkedIn</h3>
+                <a href="https://linkedin.com/in/mujeebur-rehman-526387200" target="_blank">Connect with me</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 Mujeebur Rehman. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">Data Analyst | Data Scientist | AI & ML Specialist | Full Stack MERN Developer</p>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slider = document.getElementById('expertiseSlider');
+        const dots = document.querySelectorAll('.slider-dot');
+        const totalSlides = 4;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 5000);
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        }));
+    </script>
+</body>
+</html>
