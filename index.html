@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mujeebur Rehman | AI & Data Scientist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-glow: rgba(79, 70, 229, 0.4);
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.4);
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.6);
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-dark); 
+            color: var(--text-light); 
+            overflow-x: hidden; 
+            line-height: 1.6;
+        }
+
+        /* --- Utilities --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section-title { 
+            font-family: 'Poppins', sans-serif; 
+            font-size: 2.5rem; 
+            text-align: center; 
+            margin-bottom: 3.5rem; 
+            background: linear-gradient(to right, var(--accent), var(--secondary)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin: 0.8rem auto 0;
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6); }
+        .btn-outline {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--accent);
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+        .btn-outline:hover { background: rgba(6, 182, 212, 0.15); transform: translateY(-5px); box-shadow: 0 5px 20px var(--accent-glow); }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 0;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.6rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { 
+            color: var(--text-light); 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a:not(.btn)::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--accent); transition: width 0.3s ease;
+        }
+        .nav-links a:not(.btn):hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.15), transparent 45%),
+                        radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.12), transparent 45%);
+            padding-top: 80px;
+        }
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            width: 100%;
+        }
+        .hero-content { flex: 1; max-width: 680px; z-index: 2; }
+        .hero-image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        /* Animated Glow behind profile picture */
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(30px);
+            opacity: 0.5;
+            animation: pulse-glow 4s ease-in-out infinite alternate;
+        }
+        @keyframes pulse-glow {
+            0% { transform: scale(0.95); opacity: 0.4; filter: blur(30px); }
+            100% { transform: scale(1.05); opacity: 0.7; filter: blur(45px); }
+        }
+
+        .profile-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            background-color: var(--bg-card);
+            z-index: 1;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hero-image-wrapper:hover .profile-img {
+            transform: scale(1.05) rotate(2deg);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4.2rem;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+        .hero h1 .gradient-text {
+            background: linear-gradient(to right, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255,255,255,0.1);
+        }
+        .typewriter {
+            font-size: 1.6rem;
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 1.5rem;
+            min-height: 1.6em;
+            font-weight: 600;
+        }
+        .hero-badges { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .hero-badge {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(5px);
+            color: #e2e8f0;
+        }
+        .hero-badge i { color: var(--secondary); }
+
+        .hero-text-list {
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .hero-text-list span {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+        .hero-text-list strong { color: #fff; }
+        .hero-text-list i { color: var(--accent); margin-top: 0.3rem; }
+
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        /* --- Expertise (Grid) --- */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem 0;
+        }
+        .card {
+            background: linear-gradient(145deg, var(--bg-card), rgba(15, 23, 42, 0.8));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(79, 70, 229, 0.1) inset;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .card:hover::before { opacity: 1; }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        .card h3 { font-family: 'Poppins', sans-serif; font-size: 1.3rem; margin-bottom: 1rem; color: #fff; }
+        .card p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.4rem 0.9rem;
+            background: rgba(79, 70, 229, 0.1);
+            color: #cbd5e1;
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        .card:hover .tag { border-color: rgba(79, 70, 229, 0.5); color: #fff; }
+
+        /* --- Timeline --- */
+        .timeline { position: relative; max-width: 850px; margin: 0 auto; }
+        .timeline::before {
+            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--primary), transparent);
+        }
+        .timeline-item { position: relative; padding-left: 3rem; margin-bottom: 3rem; }
+        .timeline-dot {
+            position: absolute; left: -8px; top: 0; width: 18px; height: 18px;
+            background: var(--bg-dark); border: 4px solid var(--accent); border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transition: all 0.3s;
+        }
+        .timeline-item:hover .timeline-dot { background: var(--accent); transform: scale(1.2); }
+        .timeline-content {
+            background: linear-gradient(145deg, rgba(30,41,59,0.7), rgba(15,23,42,0.4));
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .timeline-item:hover .timeline-content { transform: translateX(10px); border-color: rgba(6, 182, 212, 0.3); }
+        .timeline-role { font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
+        .timeline-company { color: var(--accent); font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .timeline-date { font-size: 0.85rem; color: #64748b; margin-bottom: 1.2rem; display: block; font-weight: 500; }
+        .timeline-content ul { list-style-position: outside; margin-left: 1rem; color: var(--text-gray); font-size: 0.95rem; }
+        .timeline-content li { margin-bottom: 0.6rem; padding-left: 0.5rem; }
+        .timeline-content li::marker { color: var(--secondary); }
+
+        /* --- Projects --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .project-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(79,70,229,0.15), rgba(139,92,246,0.05));
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+        }
+        .project-tech-stack { color: var(--accent); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 1.5px; }
+        .project-header h3 { font-family: 'Poppins', sans-serif; font-size: 1.4rem; color: #fff; line-height: 1.3; }
+        .project-body { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-desc { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6; }
+        
+        .project-impact {
+            background: rgba(15, 23, 42, 0.5);
+            border-left: 3px solid var(--secondary);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+        }
+        .project-impact strong { color: var(--accent); }
+
+        .file-downloads {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        .file-downloads p { font-size: 0.8rem; color: #cbd5e1; margin-bottom: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .download-btn-group { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .btn-tiny {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #e2e8f0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+        }
+        .btn-tiny:hover { background: rgba(79, 70, 229, 0.2); border-color: var(--primary); color: #fff; transform: translateY(-2px); }
+
+        /* --- Contact --- */
+        .contact-section { padding: 6rem 0; text-align: center; background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.8)); position: relative; }
+        .contact-intro { max-width: 800px; margin: 0 auto; color: #cbd5e1; font-size: 1.1rem; line-height: 1.8; }
+        .contact-highlight { color: var(--accent); font-weight: 600; }
+        
+        .contact-cards { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 4rem; }
+        .contact-card {
+            background: linear-gradient(145deg, var(--bg-card), rgba(15, 23, 42, 0.9));
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            min-width: 260px;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .contact-card:hover { transform: translateY(-10px); background: rgba(79, 70, 229, 0.05); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .contact-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.2rem; display: block; }
+        .contact-card h4 { margin-bottom: 0.8rem; font-family: 'Poppins', sans-serif; font-size: 1.2rem; color: #fff; }
+        .contact-card span { color: var(--text-gray); font-size: 0.95rem; }
+        .contact-card a.phone-link {
+            display: inline-block;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin: 0.4rem 0;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.03);
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .contact-card a.phone-link:hover { color: #fff; background: rgba(6, 182, 212, 0.15); border-color: var(--accent); }
+
+        footer { text-align: center; padding: 2.5rem; color: var(--text-gray); font-size: 0.9rem; border-top: 1px solid var(--glass-border); background: var(--bg-dark); }
+        footer span { color: var(--accent); font-weight: 600; }
+
+        /* --- Animation Classes --- */
+        .hidden { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .show { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 960px) {
+            .hero-inner { flex-direction: column-reverse; text-align: center; margin-top: 2rem; gap: 3rem; }
+            .hero-badges, .hero-buttons { justify-content: center; }
+            .hero-text-list span { text-align: left; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .hero h1 { font-size: 3.2rem; }
+            .profile-img { width: 280px; height: 280px; }
+            .hero-image-wrapper::before { width: 290px; height: 290px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .expertise-grid, .project-grid { grid-template-columns: 1fr; }
+            .timeline::before { left: -10px; }
+            .timeline-item { padding-left: 1.5rem; }
+            .timeline-dot { left: -19px; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">Mujeebur <span>Rehman</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Let's Talk</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container hero-inner hidden">
+            <div class="hero-content">
+                <div class="hero-badges">
+                    <div class="hero-badge"><i class="fas fa-map-marker-alt"></i> Dubai, UAE</div>
+                    </div>
+                <h1><span class="gradient-text">Mujeebur Rehman</span></h1>
+                <div class="typewriter" id="typewriter"></div>
+                
+                <div class="hero-text-list">
+                    <span>
+                        <i class="fas fa-bullseye"></i>
+                        <div><strong>Experience-Driven:</strong> 3.8+ years transforming ideas into intelligent, production‑ready solutions.</div>
+                    </span>
+                    <span>
+                        <i class="fas fa-rocket"></i>
+                        <div><strong>Full‑Stack + AI Identity:</strong> Engineering end‑to‑end intelligent solutions across Data Science, AI, and Full‑Stack Development.</div>
+                    </span>
+                    <span>
+                        <i class="fas fa-brain"></i>
+                        <div><strong>Analytical & Professional:</strong> Turning data into insight. Turning insight into innovation.</div>
+                    </span>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Hire Me</a>
+                    <a href="#projects" class="btn btn-outline"><i class="fas fa-folder-open"></i> Explore Work</a>
+                </div>
+            </div>
+            
+            <div class="hero-image-wrapper">
+                <img src="profile-photo.jpg" alt="Mujeebur Rehman" class="profile-img" onerror="this.src='https://via.placeholder.com/350x350/1e293b/06b6d4?text=MR'">
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" style="padding: 6rem 0;">
+        <div class="container">
+            <h2 class="section-title">Technical Arsenal</h2>
+            
+            <div class="expertise-grid">
+                <div class="card hidden">
+                    <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Data Scientist & ML</h3>
+                    <p>Building robust predictive models for forecasting, classification, and clustering. Focused on achieving high accuracy and minimizing business risk.</p>
+                    <div class="tags">
+                        <span class="tag">Data Science</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Scikit-learn</span>
+                        <span class="tag">XGBoost</span>
+                    </div>
+                </div>
+
+                <div class="card hidden">
+                    <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+                    <h3>Data Analyst & BI</h3>
+                    <p>Transforming raw database records into visually compelling, interactive executive dashboards to track KPIs and drive strategic decisions.</p>
+                    <div class="tags">
+                        <span class="tag">Data Analysis</span>
+                        <span class="tag">Power BI</span>
+                        <span class="tag">Advanced Excel</span>
+                        <span class="tag">SQL / PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div class="card hidden">
+                    <div class="card-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI & Autonomous Agents</h3>
+                    <p>Designing intelligent agentic workflows, RAG systems, and integrating Large Language Models for automated decision-making and content generation.</p>
+                    <div class="tags">
+                        <span class="tag">Generative AI</span> <span class="tag">LangChain</span>
+                        <span class="tag">AI Agents</span>
+                        <span class="tag">LLMs</span>
+                    </div>
+                </div>
+
+                <div class="card hidden">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>Full Stack Engineering</h3>
+                    <p>Developing scalable web applications with robust database architectures, secure APIs, and responsive, user-friendly frontends.</p>
+                    <div class="tags">
+                        <span class="tag">React.js</span>
+                        <span class="tag">Node.js / Express</span>
+                        <span class="tag">MongoDB</span>
+                        <span class="tag">REST APIs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="padding: 6rem 0; background: rgba(0,0,0,0.15);">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <a href="https://github.com/mujeebur-rehman-au52/projects" target="_blank" class="btn btn-outline" style="border-radius: 8px;">
+                    <i class="fab fa-github"></i> Visit GitHub Repository
+                </a>
+            </div>
+
+            <div class="project-grid">
+
+                <div class="project-card hidden" style="border: 1px solid rgba(6, 182, 212, 0.4); box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);">
+                    <div class="project-header">
+                        <div class="project-tech-stack">Python • LangChain • LLMs • APIs</div>
+                        <h3>Autonomous AI Agent Workflows</h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">
+                            Developed multi-agent systems capable of autonomous reasoning, web research, and executing complex business workflows without human intervention.
+                        </p>
+                        <div class="project-impact">
+                            <strong>Key Impact:</strong> Automates repetitive analytical tasks, reducing manual research time by up to 70% using intelligent tool-calling.
+                        </div>
+                        <div class="file-downloads">
+                            <p><i class="fas fa-paperclip"></i> Implementation Files</p>
+                            <div class="download-btn-group">
+                                <a href="#" class="btn-tiny"><i class="fab fa-python"></i> agent_workflow.py</a>
+                                <a href="#" class="btn-tiny"><i class="fas fa-file-code"></i> tools_config.json</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card hidden">
+                    <div class="project-header">
+                        <div class="project-tech-stack">Python • PostgreSQL • Advanced Excel</div>
+                        <h3>Dubai Fleet Management Analytics</h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">
+                            End-to-end data solution for commercial fleet tracking. Engineered SQL schemas for vehicle data and Python pipelines for predictive maintenance.
+                        </p>
+                        <div class="project-impact">
+                            <strong>Key Impact:</strong> Optimized route planning and monitored Salik/fuel costs, leading to actionable insights for operational cost reduction.
+                        </div>
+                        <div class="file-downloads">
+                            <p><i class="fas fa-database"></i> Source Code & Data</p>
+                            <div class="download-btn-group">
+                                <a href="Dubai_Fleet_PostgreSQL_Schema.sql" download class="btn-tiny"><i class="fas fa-database"></i> Schema.sql</a>
+                                <a href="Dubai_Fleet_Python_Analysis.py" download class="btn-tiny"><i class="fab fa-python"></i> Analysis.py</a>
+                                <a href="Fleet_Management_System - Mujeebur.xlsx" download class="btn-tiny"><i class="fas fa-file-excel"></i> Tracker.xlsx</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card hidden">
+                    <div class="project-header">
+                        <div class="project-tech-stack">Power BI • SQL • DAX • Power Query</div>
+                        <h3>Enterprise BI Performance Dashboard</h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">
+                            Designed and deployed interactive executive dashboards that consolidate multi-departmental data into unified, real-time performance metrics.
+                        </p>
+                        <div class="project-impact">
+                            <strong>Key Impact:</strong> Replaced static reporting with dynamic visual models, improving management reporting efficiency by 30%.
+                        </div>
+                        <div class="file-downloads">
+                            <p><i class="fas fa-chart-bar"></i> Dashboard Assets</p>
+                            <div class="download-btn-group">
+                                <a href="#" class="btn-tiny"><i class="fas fa-chart-pie"></i> Enterprise_Dashboard.pbix</a>
+                                <a href="#" class="btn-tiny"><i class="fas fa-table"></i> Data_Model.csv</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card hidden">
+                    <div class="project-header">
+                        <div class="project-tech-stack">Python • Reinforcement Learning • Claude</div>
+                        <h3>AI Personalized Learning Platform</h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">
+                            Built an adaptive educational platform that utilizes Reinforcement Learning and Generative AI to tailor content difficulty to individual student progress.
+                        </p>
+                        <div class="project-impact">
+                            <strong>Key Impact:</strong> Deployed to 500+ users, achieving a 40% improvement in learning outcomes through hyper-personalized curriculum delivery.
+                        </div>
+                        <div class="file-downloads">
+                            <p><i class="fas fa-brain"></i> Model Architecture</p>
+                            <div class="download-btn-group">
+                                <a href="#" class="btn-tiny"><i class="fab fa-python"></i> RL_Recommendation_Model.py</a>
+                                <a href="#" class="btn-tiny"><i class="fas fa-file-pdf"></i> System_Architecture.pdf</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" style="padding: 6rem 0;">
+        <div class="container">
+            <h2 class="section-title">Career Journey</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item hidden">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">AI & ML Specialist</div>
+                        <div class="timeline-company"><i class="fas fa-building"></i> Masai School, Bengaluru</div>
+                        <span class="timeline-date"><i class="fas fa-calendar-alt"></i> Sep 2025 - Dec 2025</span>
+                        <ul>
+                            <li>Architected AI learning platform using LLMs, serving 500+ students.</li>
+                            <li>Achieved 40% better learning outcomes through personalized content delivery.</li>
+                            <li>Optimized Machine Learning models, achieving 50% faster response times.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item hidden">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">Data Analyst</div>
+                        <div class="timeline-company"><i class="fas fa-building"></i> Delta, Pune</div>
+                        <span class="timeline-date"><i class="fas fa-calendar-alt"></i> Aug 2024 - Sep 2025</span>
+                        <ul>
+                            <li>Analyzed 100K+ datasets impacting 5+ distinct business departments.</li>
+                            <li>Built 10+ Power BI dashboards, improving reporting efficiency by 30%.</li>
+                            <li>Developed predictive forecast models yielding 28% higher accuracy.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item hidden">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">Data Analyst</div>
+                        <div class="timeline-company"><i class="fas fa-building"></i> Pantech Solutions, Tamil Nadu</div>
+                        <span class="timeline-date"><i class="fas fa-calendar-alt"></i> Nov 2023 - Jun 2024</span>
+                        <ul>
+                            <li>Implemented data solutions improving overall operational efficiency by 20%.</li>
+                            <li>Streamlined reporting processes via automated Excel and BI dashboards.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item hidden">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">Full Stack MERN Developer</div>
+                        <div class="timeline-company"><i class="fas fa-building"></i> AttainU University</div>
+                        <span class="timeline-date"><i class="fas fa-clock"></i> 18 Months Experience</span>
+                        <ul>
+                            <li>Developed full-stack web apps using MongoDB, Express, React, Node.js.</li>
+                            <li>Built RESTful APIs and implemented secure JWT user authentication.</li>
+                            <li>Integrated 3rd party services like Stripe payments and mapping APIs.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Open to Opportunities</h2>
+            
+            <p class="contact-intro hidden">
+                I am actively seeking new opportunities as a <span class="contact-highlight">Data Analyst, Data Scientist, Business Analyst, & Artificial Intelligence and Machine Learning Engineer</span> in <span class="contact-highlight">Dubai & Riyadh</span>.<br> I am also open to <span class="contact-highlight">Remote work</span> and <span class="contact-highlight">Freelance work</span>.
+            </p>
+            
+            <div class="contact-cards hidden">
+                <a href="mailto:mujeebur.rehman.data.ai@gmail.com" class="contact-card">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <h4>Email Me</h4>
+                    <span>mujeebur.rehman.data.ai@gmail.com</span>
+                </a>
+                
+                <div class="contact-card">
+                    <i class="fas fa-phone-volume"></i>
+                    <h4>Call Me</h4>
+                    <a href="tel:+971565327237" class="phone-link">🇦🇪 +971 565327237</a>
+                    <a href="tel:+919902841925" class="phone-link">🇮🇳 +91 9902841925</a>
+                </div>
+
+                <a href="https://linkedin.com/in/mujeebur-rehman-526387200" target="_blank" class="contact-card">
+                    <i class="fab fa-linkedin"></i>
+                    <h4>LinkedIn</h4>
+                    <span>Connect & Network</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Mujeebur Rehman. Engineered with <span>Data</span> & <span>AI</span>.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Typewriter Effect
+        const typeWriterElement = document.getElementById('typewriter');
+        const phrases = ['Data Scientist', 'Data Analyst', 'AI & ML Engineer', 'Full Stack MERN Dev'];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typeWriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeWriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 80 : 120);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', type);
+
+        // Scroll Animation (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
